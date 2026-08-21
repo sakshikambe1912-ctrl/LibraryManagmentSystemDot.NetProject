@@ -1,0 +1,57 @@
+﻿@model LibraryManagmentSystemMVC.Models.BookViewModel
+
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+<h1>Add Book</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="PublishedYear" class="form-label"></label>
+                <input asp-for="PublishedYear" type="number" class="form-control" />
+                <span asp-validation-for="PublishedYear" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="TotalCopies" class="form-label"></label>
+                <input asp-for="TotalCopies" type="number" class="form-control" />
+                <span asp-validation-for="TotalCopies" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="AvailableCpoies" class="form-label">Available Copies</label>
+                <input asp-for="AvailableCpoies" type="number" class="form-control" />
+                <span asp-validation-for="AvailableCpoies" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="AuthorId" class="form-label">Author</label>
+                <select asp-for="AuthorId" asp-items="ViewBag.Authors" class="form-control">
+                    <option value="">----Select Author----</option>
+                </select>
+                <span asp-validation-for="AuthorId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
