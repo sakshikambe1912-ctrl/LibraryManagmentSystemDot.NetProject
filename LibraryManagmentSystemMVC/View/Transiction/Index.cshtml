@@ -1,0 +1,57 @@
+﻿@model List<TransictionViewModel>
+
+@{
+    ViewData["Title"] = "Transictions";
+}
+
+<h1>Transictions</h1>
+<a asp-action="Issue" class="btn btn-primary mb-3">Issue Book</a>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Book</th>
+            <th>Member</th>
+            <th>Issue Date</th>
+            <th>Due Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+            <th>Fine</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model)
+        {
+            <tr>
+                <td>@(t.Book?.Title ?? t.BookId.ToString())</td>
+                <td>@(t.Member?.Name ?? t.MemberId.ToString())</td>
+                <td>@t.IssueDate.ToShortDateString()</td>
+                <td>@t.DueDate.ToShortDateString()</td>
+                <td>@(t.ReturnDate.HasValue ? t.ReturnDate.Value.ToShortDateString() : "-")</td>
+                <td>
+                    @if (t.Status == "Returned")
+                    {
+                        <span class="badge bg-success">@t.Status</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">@t.Status</span>
+                    }
+                </td>
+                <td>@t.FineAmount</td>
+                <td>
+                    @if (t.Status != "Returned")
+                    {
+                        <a asp-action="Return" asp-route-id="@t.Id" class="btn btn-sm btn-outline-primary">Return</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

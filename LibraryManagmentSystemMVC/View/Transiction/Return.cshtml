@@ -1,0 +1,51 @@
+﻿@model LibraryManagmentSystemMVC.Models.ReturnTransictionViewModel
+
+@{
+    ViewData["Title"] = "Return Book";
+    var t = ViewBag.Transiction as TransictionViewModel;
+}
+
+<h1>Return Book</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        @if (t != null)
+        {
+            <dl class="row">
+                <dt class="col-sm-4">Book</dt>
+                <dd class="col-sm-8">@(t.Book?.Title ?? t.BookId.ToString())</dd>
+
+                <dt class="col-sm-4">Member</dt>
+                <dd class="col-sm-8">@(t.Member?.Name ?? t.MemberId.ToString())</dd>
+
+                <dt class="col-sm-4">Issue Date</dt>
+                <dd class="col-sm-8">@t.IssueDate.ToShortDateString()</dd>
+
+                <dt class="col-sm-4">Due Date</dt>
+                <dd class="col-sm-8">@t.DueDate.ToShortDateString()</dd>
+            </dl>
+        }
+
+        <form asp-action="Return" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="FineAmount" class="form-label"></label>
+                <input asp-for="FineAmount" type="number" step="0.01" class="form-control" />
+                <span asp-validation-for="FineAmount" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Mark as Returned</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
