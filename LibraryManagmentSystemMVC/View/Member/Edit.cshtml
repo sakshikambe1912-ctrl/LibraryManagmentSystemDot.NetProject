@@ -1,0 +1,45 @@
+﻿@model LibraryManagmentSystemMVC.Models.MemberViewModel
+
+@{
+    ViewData["Title"] = "Update Member";
+}
+
+<h1>Update Member</h1>
+<p class="text-muted">The API only allows updating the phone number for a member.</p>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Name</dt>
+            <dd class="col-sm-8">@Model.Name</dd>
+
+            <dt class="col-sm-4">Email</dt>
+            <dd class="col-sm-8">@Model.Email</dd>
+
+            <dt class="col-sm-4">Issue Date</dt>
+            <dd class="col-sm-8">@Model.IssueDate.ToShortDateString()</dd>
+        </dl>
+
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="Phoneno" class="form-label">Phone Number</label>
+                <input asp-for="Phoneno" class="form-control" />
+                <span asp-validation-for="Phoneno" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
