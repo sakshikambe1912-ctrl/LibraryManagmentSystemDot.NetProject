@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="p-5 mb-4 bg-primary text-white rounded-3 shadow">
+    <div class="container-fluid py-4">
+        <h1 class="display-4 fw-bold">📚 Welcome to LibraryMVC</h1>
+        @if (!string.IsNullOrEmpty(ViewBag.UserName))
+        {
+            <p class="fs-4">Hello, <strong>@ViewBag.UserName</strong>! Ready to manage your library today?</p>
+        }
+        else
+        {
+            <p class="fs-4">Your one-stop system for managing books, members, and transactions.</p>
+        }
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card h-100 text-center shadow-sm border-0">
+            <div class="card-body">
+                <div class="display-3 mb-3">📖</div>
+                <h5 class="card-title">Books</h5>
+                <p class="card-text text-muted">Browse, add, and manage your book catalog.</p>
+                <a asp-controller="Book" asp-action="Index" class="btn btn-primary">View Books</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card h-100 text-center shadow-sm border-0">
+            <div class="card-body">
+                <div class="display-3 mb-3">✍️</div>
+                <h5 class="card-title">Authors</h5>
+                <p class="card-text text-muted">Keep track of all your authors.</p>
+                <a asp-controller="Author" asp-action="Index" class="btn btn-primary">View Authors</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card h-100 text-center shadow-sm border-0">
+            <div class="card-body">
+                <div class="display-3 mb-3">🧑‍🤝‍🧑</div>
+                <h5 class="card-title">Members</h5>
+                <p class="card-text text-muted">Manage member registrations and details.</p>
+                <a asp-controller="Member" asp-action="Index" class="btn btn-primary">View Members</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card h-100 text-center shadow-sm border-0">
+            <div class="card-body">
+                <div class="display-3 mb-3">🔄</div>
+                <h5 class="card-title">Transactions</h5>
+                <p class="card-text text-muted">Issue and return books with ease.</p>
+                <a asp-controller="Transiction" asp-action="Index" class="btn btn-primary">View Transactions</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-light border text-center">
+    <p class="mb-0 text-muted">Use the navigation bar above to jump between sections anytime.</p>
+</div>
